@@ -1,14 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Intersection Observer for fade-in animations
-    const revealElements = document.querySelectorAll('.observer-reveal');
+    const revealElements = document.querySelectorAll('.reveal');
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Optional: Stop observing once revealed
-                // observer.unobserve(entry.target); 
             }
         });
     }, {
@@ -19,33 +17,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // 2. Parallax effect for glow orbs on desktop
-    const orbs = document.querySelectorAll('.glow-orb');
+    // 2. Interactive Expertise Accordion 
+    const categories = document.querySelectorAll('.exp-category');
     
-    window.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
+    // Set initial height for the active one
+    categories.forEach(cat => {
+        if(cat.classList.contains('active')) {
+            const content = cat.querySelector('.exp-content');
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    });
 
-        orbs.forEach((orb, index) => {
-            // Different speed based on index
-            const speed = (index + 1) * 30; 
-            const moveX = (x * speed) - (speed / 2);
-            const moveY = (y * speed) - (speed / 2);
+    const headers = document.querySelectorAll('.exp-header');
+    
+    headers.forEach(header => {
+        header.addEventListener('click', () => {
+            const category = header.parentElement;
+            const content = category.querySelector('.exp-content');
             
-            // Apply slight transform alongside the float animation
-            orb.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            // Toggle active state
+            const isActive = category.classList.contains('active');
+            
+            // Close all other categories first (optional, for accordion effect)
+            categories.forEach(cat => {
+                cat.classList.remove('active');
+                cat.querySelector('.exp-content').style.maxHeight = null;
+            });
+
+            // If it wasn't active, open it
+            if (!isActive) {
+                category.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
         });
     });
 
     // 3. Navbar scroll effect
-    const navbar = document.querySelector('.navbar');
+    const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            navbar.style.background = 'rgba(255, 255, 255, 0.05)';
-            navbar.style.boxShadow = '0 4px 30px rgba(0,0,0,0.5)';
+            navbar.classList.add('scrolled');
         } else {
-            navbar.style.background = 'rgba(255, 255, 255, 0.02)';
-            navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+            navbar.classList.remove('scrolled');
         }
     });
 
