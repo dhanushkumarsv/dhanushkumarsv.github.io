@@ -26,7 +26,7 @@
         <div class="container nav-inner">
             <a href="#home" class="brand">
                 <span class="brand-mark">
-                    <i class="fa-solid fa-gauge-high"></i>
+                    <i class="fa-solid fa-industry"></i>
                 </span>
                 <span class="brand-text">DK<span class="brand-dot">.</span>SV</span>
             </a>
@@ -57,31 +57,36 @@
 
     <main>
 
-        <!-- ===== Hero ===== -->
+        <!-- ===== Hero with interactive 3D process plant ===== -->
         <section class="hero" id="home">
-            <canvas id="flow-canvas" aria-hidden="true"></canvas>
-            <div class="hero-glow" aria-hidden="true"></div>
+            <canvas id="plant-canvas" aria-hidden="true"></canvas>
 
-            <div class="container hero-content">
-                <p class="hero-eyebrow mono"><span class="pulse-dot"></span> Open to opportunities · Taichung, Taiwan</p>
-                <h1 class="hero-name">Dhanush Kumar <span class="grad-text">S V</span></h1>
-                <h2 class="hero-role mono">&gt; <span id="typed-role"></span><span class="cursor">_</span></h2>
-                <p class="hero-tagline">
-                    Chemical &amp; Process Engineer grounded in transport phenomena, fluid dynamics,
-                    heat transfer and thermodynamics — turning first principles into optimized,
-                    plant-scale processes.
-                </p>
+            <div class="container hero-layout">
+                <div class="hero-content">
+                    <p class="hero-eyebrow mono"><span class="pulse-dot"></span> Open to opportunities · Taichung, Taiwan</p>
+                    <h1 class="hero-name">Dhanush Kumar <span class="grad-text">S V</span></h1>
+                    <h2 class="hero-role mono">&gt; <span id="typed-role"></span><span class="cursor">_</span></h2>
+                    <p class="hero-tagline">
+                        Process Engineer skilled in process simulation, optimization and manufacturing
+                        improvement — enhancing production efficiency and product quality through
+                        data-driven analysis.
+                    </p>
 
-                <div class="hero-cta">
-                    <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-gears"></i> Explore My Work</a>
-                    <a href="assets/Dhanush_Kumar_SV_Resume.pdf" class="btn btn-ghost" download><i class="fa-solid fa-file-arrow-down"></i> Download Resume</a>
+                    <div class="hero-cta">
+                        <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-gears"></i> Explore My Work</a>
+                        <a href="assets/Dhanush_Kumar_SV_Resume.pdf" class="btn btn-ghost" download><i class="fa-solid fa-file-arrow-down"></i> Download Resume</a>
+                    </div>
+
+                    <div class="hero-meta mono">
+                        <a href="mailto:dhanushkumar795@gmail.com"><i class="fa-solid fa-envelope"></i> dhanushkumar795@gmail.com</a>
+                        <a href="tel:+8860909505486"><i class="fa-solid fa-phone"></i> +886-0909505486</a>
+                        <a href="https://linkedin.com/in/dhanush-kumar-772274213" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                    </div>
                 </div>
+            </div>
 
-                <div class="hero-meta mono">
-                    <a href="mailto:dhanushkumar795@gmail.com"><i class="fa-solid fa-envelope"></i> dhanushkumar795@gmail.com</a>
-                    <a href="tel:+8860909505486"><i class="fa-solid fa-phone"></i> +886-0909505486</a>
-                    <a href="https://linkedin.com/in/dhanush-kumar-772274213" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-                </div>
+            <div class="drag-hint mono" id="drag-hint">
+                <i class="fa-solid fa-hand-pointer"></i> drag to rotate the plant
             </div>
 
             <a href="#about" class="scroll-hint" aria-label="Scroll down">
@@ -101,28 +106,24 @@
 
                 <div class="about-grid">
                     <div class="about-photo reveal">
-                        <div class="photo-frame">
+                        <div class="photo-frame tilt">
                             <img src="images/PXL_20251206_024535104.PORTRAIT.jpg" alt="Portrait of Dhanush Kumar S V">
                         </div>
                         <span class="float-badge fb-1 mono">Re = ρvD/μ</span>
-                        <span class="float-badge fb-2 mono">Nu = hL/k</span>
+                        <span class="float-badge fb-2 mono">Q̇ = UAΔT</span>
                         <span class="float-badge fb-3 mono">ΔG = ΔH − TΔS</span>
                     </div>
 
                     <div class="about-text reveal">
                         <p class="lead">
-                            I'm a <strong>Chemical &amp; Process Engineer</strong> with a strong foundation in
-                            <strong>transport phenomena</strong>, <strong>fluid dynamics</strong>,
-                            <strong>heat transfer</strong> and <strong>thermodynamics</strong> — the physics
-                            that governs every real process.
+                            I'm a <strong>Process Engineer</strong> skilled in process simulation, optimization and
+                            manufacturing improvement. I work with <strong>Aspen Plus</strong>, <strong>Aspen HYSYS</strong>
+                            and <strong>MATLAB</strong> to model chemical and semiconductor processes.
                         </p>
                         <p>
-                            I apply those first principles through process simulation and optimization, using
-                            <strong>Aspen Plus</strong>, <strong>Aspen HYSYS</strong> and <strong>MATLAB</strong>
-                            to model chemical and semiconductor processes. With a strong understanding of yield
-                            improvement, defect reduction and process integration, I'm dedicated to enhancing
-                            production efficiency and product quality through data-driven analysis and
-                            continuous improvement.
+                            With a strong understanding of yield improvement, defect reduction and process
+                            integration, I'm dedicated to enhancing production efficiency and product quality
+                            through data-driven analysis and continuous improvement.
                         </p>
 
                         <div class="stats-row">
@@ -164,7 +165,7 @@
                 </div>
 
                 <div class="edu-grid">
-                    <article class="edu-card reveal">
+                    <article class="edu-card tilt reveal">
                         <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                         <span class="edu-period mono">2024 — Present</span>
                         <h3>M.S. in Chemical Engineering</h3>
@@ -176,7 +177,7 @@
                         </div>
                     </article>
 
-                    <article class="edu-card reveal">
+                    <article class="edu-card tilt reveal">
                         <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                         <span class="edu-period mono">2019 — 2023</span>
                         <h3>B.Tech in Chemical Engineering</h3>
@@ -191,43 +192,98 @@
             </div>
         </section>
 
-        <!-- ===== Skills : Engineering Toolbox ===== -->
+        <!-- ===== Skills : 3D flip cards ===== -->
         <section class="section" id="skills">
             <div class="container">
                 <div class="section-head reveal">
                     <span class="section-index mono">03</span>
-                    <h2 class="section-title">Engineering Toolbox</h2>
+                    <h2 class="section-title">Technical Expertise</h2>
                     <span class="section-rule"></span>
                 </div>
-                <p class="section-sub reveal">Skills tagged P&amp;ID-style, like instruments on a process flow diagram — click any tag for details.</p>
+                <p class="section-sub reveal">Hover or tap a card to flip it.</p>
 
-                <div class="legend reveal">
-                    <span class="legend-item"><span class="swatch sw-core"></span> Core Fundamentals</span>
-                    <span class="legend-item"><span class="swatch sw-sim"></span> Simulation &amp; Modeling</span>
-                    <span class="legend-item"><span class="swatch sw-int"></span> Process &amp; Manufacturing</span>
-                    <span class="legend-item"><span class="swatch sw-data"></span> Data Analysis</span>
-                    <span class="legend-item"><span class="swatch sw-doc"></span> Documentation</span>
-                </div>
+                <div class="flip-grid">
+                    <div class="flip-card reveal" tabindex="0">
+                        <div class="flip-inner">
+                            <div class="flip-face flip-front ff-teal">
+                                <i class="fa-solid fa-diagram-project"></i>
+                                <h3>Process Simulation</h3>
+                                <span class="flip-count mono">04 tools</span>
+                                <span class="flip-hint mono"><i class="fa-solid fa-rotate"></i> flip</span>
+                            </div>
+                            <div class="flip-face flip-back">
+                                <h4 class="mono">// Process Simulation</h4>
+                                <div class="flip-chips">
+                                    <span>Aspen Plus</span>
+                                    <span>Aspen HYSYS</span>
+                                    <span>MATLAB</span>
+                                    <span>GAMS</span>
+                                </div>
+                                <p>Flowsheet modeling, convergence troubleshooting and MILP optimization for chemical and energy processes.</p>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="toolbox-grid reveal" id="toolbox-grid">
-                    <button class="tag-card el-core" data-skill="Transport Phenomena"><span class="isa-bubble"><span>TP</span></span><span class="tag-info"><span class="tag-name">Transport Phenomena</span><span class="tag-code mono">TP-101</span></span></button>
-                    <button class="tag-card el-core" data-skill="Fluid Dynamics"><span class="isa-bubble"><span>FD</span></span><span class="tag-info"><span class="tag-name">Fluid Dynamics &amp; CFD</span><span class="tag-code mono">FD-102</span></span></button>
-                    <button class="tag-card el-core" data-skill="Heat Transfer"><span class="isa-bubble"><span>HT</span></span><span class="tag-info"><span class="tag-name">Heat Transfer</span><span class="tag-code mono">HT-103</span></span></button>
-                    <button class="tag-card el-core" data-skill="Thermodynamics"><span class="isa-bubble"><span>TD</span></span><span class="tag-info"><span class="tag-name">Thermodynamics</span><span class="tag-code mono">TD-104</span></span></button>
-                    <button class="tag-card el-sim" data-skill="Aspen Plus"><span class="isa-bubble"><span>AP</span></span><span class="tag-info"><span class="tag-name">Aspen Plus</span><span class="tag-code mono">AP-105</span></span></button>
-                    <button class="tag-card el-sim" data-skill="Aspen HYSYS"><span class="isa-bubble"><span>HY</span></span><span class="tag-info"><span class="tag-name">Aspen HYSYS</span><span class="tag-code mono">HY-106</span></span></button>
-                    <button class="tag-card el-sim" data-skill="MATLAB"><span class="isa-bubble"><span>ML</span></span><span class="tag-info"><span class="tag-name">MATLAB</span><span class="tag-code mono">ML-107</span></span></button>
-                    <button class="tag-card el-sim" data-skill="GAMS"><span class="isa-bubble"><span>GA</span></span><span class="tag-info"><span class="tag-name">GAMS</span><span class="tag-code mono">GA-108</span></span></button>
-                    <button class="tag-card el-int" data-skill="Electrochemical Coating"><span class="isa-bubble"><span>EC</span></span><span class="tag-info"><span class="tag-name">Electrochemical Coating</span><span class="tag-code mono">EC-109</span></span></button>
-                    <button class="tag-card el-int" data-skill="Surface Process Modeling"><span class="isa-bubble"><span>SM</span></span><span class="tag-info"><span class="tag-name">Surface Process Modeling</span><span class="tag-code mono">SM-110</span></span></button>
-                    <button class="tag-card el-int" data-skill="Yield Optimization"><span class="isa-bubble"><span>YO</span></span><span class="tag-info"><span class="tag-name">Yield Optimization</span><span class="tag-code mono">YO-111</span></span></button>
-                    <button class="tag-card el-data" data-skill="Origin"><span class="isa-bubble"><span>OG</span></span><span class="tag-info"><span class="tag-name">Origin</span><span class="tag-code mono">OG-112</span></span></button>
-                    <button class="tag-card el-data" data-skill="Excel"><span class="isa-bubble"><span>EX</span></span><span class="tag-info"><span class="tag-name">Excel</span><span class="tag-code mono">EX-113</span></span></button>
-                    <button class="tag-card el-data" data-skill="ImageJ"><span class="isa-bubble"><span>IJ</span></span><span class="tag-info"><span class="tag-name">ImageJ</span><span class="tag-code mono">IJ-114</span></span></button>
-                    <button class="tag-card el-data" data-skill="Python"><span class="isa-bubble"><span>PY</span></span><span class="tag-info"><span class="tag-name">Python</span><span class="tag-code mono">PY-115</span></span></button>
-                    <button class="tag-card el-doc" data-skill="Process Flow Reports"><span class="isa-bubble"><span>PF</span></span><span class="tag-info"><span class="tag-name">Process Flow Reports</span><span class="tag-code mono">PF-116</span></span></button>
-                    <button class="tag-card el-doc" data-skill="Design of Experiments"><span class="isa-bubble"><span>DE</span></span><span class="tag-info"><span class="tag-name">Design of Experiments</span><span class="tag-code mono">DE-117</span></span></button>
-                    <button class="tag-card el-doc" data-skill="Technical Writing"><span class="isa-bubble"><span>TW</span></span><span class="tag-info"><span class="tag-name">Technical Writing</span><span class="tag-code mono">TW-118</span></span></button>
+                    <div class="flip-card reveal" tabindex="0">
+                        <div class="flip-inner">
+                            <div class="flip-face flip-front ff-cyan">
+                                <i class="fa-solid fa-gears"></i>
+                                <h3>Process Integration</h3>
+                                <span class="flip-count mono">03 areas</span>
+                                <span class="flip-hint mono"><i class="fa-solid fa-rotate"></i> flip</span>
+                            </div>
+                            <div class="flip-face flip-back">
+                                <h4 class="mono">// Process Integration</h4>
+                                <div class="flip-chips">
+                                    <span>Electrochemical coating</span>
+                                    <span>Surface process modeling</span>
+                                    <span>Yield optimization</span>
+                                </div>
+                                <p>Surface treatment know-how and data-backed yield improvement from rolling lines to coatings.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card reveal" tabindex="0">
+                        <div class="flip-inner">
+                            <div class="flip-face flip-front ff-violet">
+                                <i class="fa-solid fa-chart-column"></i>
+                                <h3>Data Analysis</h3>
+                                <span class="flip-count mono">04 tools</span>
+                                <span class="flip-hint mono"><i class="fa-solid fa-rotate"></i> flip</span>
+                            </div>
+                            <div class="flip-face flip-back">
+                                <h4 class="mono">// Data Analysis</h4>
+                                <div class="flip-chips">
+                                    <span>Origin</span>
+                                    <span>Excel</span>
+                                    <span>ImageJ</span>
+                                    <span>Python</span>
+                                </div>
+                                <p>Experimental data processing, scientific plotting and image-based measurement for process insight.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card reveal" tabindex="0">
+                        <div class="flip-inner">
+                            <div class="flip-face flip-front ff-amber">
+                                <i class="fa-solid fa-file-lines"></i>
+                                <h3>Documentation</h3>
+                                <span class="flip-count mono">03 skills</span>
+                                <span class="flip-hint mono"><i class="fa-solid fa-rotate"></i> flip</span>
+                            </div>
+                            <div class="flip-face flip-back">
+                                <h4 class="mono">// Documentation</h4>
+                                <div class="flip-chips">
+                                    <span>Process flow reports</span>
+                                    <span>Design of experiments</span>
+                                    <span>Technical writing</span>
+                                </div>
+                                <p>Clear engineering communication — from DOE planning to conference publications.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -242,7 +298,7 @@
                 </div>
 
                 <div class="project-grid">
-                    <article class="project-card reveal">
+                    <article class="project-card tilt reveal">
                         <div class="project-top">
                             <span class="exp-tag mono">EXP-01</span>
                             <i class="fa-solid fa-droplet project-icon"></i>
@@ -259,7 +315,7 @@
                         </div>
                     </article>
 
-                    <article class="project-card reveal">
+                    <article class="project-card tilt reveal">
                         <div class="project-top">
                             <span class="exp-tag mono">EXP-02</span>
                             <i class="fa-solid fa-diagram-project project-icon"></i>
@@ -276,7 +332,7 @@
                         </div>
                     </article>
 
-                    <article class="project-card reveal">
+                    <article class="project-card tilt reveal">
                         <div class="project-top">
                             <span class="exp-tag mono">EXP-03</span>
                             <i class="fa-solid fa-sun project-icon"></i>
@@ -380,12 +436,12 @@
                 </div>
 
                 <div class="pub-grid">
-                    <article class="pub-card reveal">
+                    <article class="pub-card tilt reveal">
                         <i class="fa-solid fa-book-open pub-icon"></i>
                         <p class="pub-title">"Location Selection and Purification Process Simulation for a Glycerol Plant."</p>
                         <span class="pub-badge mono">ICATES 2024</span>
                     </article>
-                    <article class="pub-card reveal">
+                    <article class="pub-card tilt reveal">
                         <i class="fa-solid fa-book-open pub-icon"></i>
                         <p class="pub-title">"Production of Hydrogen Gas Using Photo-catalytic Method."</p>
                         <span class="pub-badge mono">ICATES 2023</span>
@@ -405,7 +461,7 @@
                 <p class="section-sub reveal">Grab a copy of my credentials — ready for recruiters and collaborators.</p>
 
                 <div class="download-grid">
-                    <article class="download-card featured reveal">
+                    <article class="download-card featured tilt reveal">
                         <div class="dl-icon"><i class="fa-solid fa-file-pdf"></i></div>
                         <div class="dl-info">
                             <h3>Resume / CV</h3>
@@ -417,7 +473,7 @@
                         </a>
                     </article>
 
-                    <article class="download-card reveal">
+                    <article class="download-card tilt reveal">
                         <div class="dl-icon alt"><i class="fa-solid fa-address-card"></i></div>
                         <div class="dl-info">
                             <h3>Contact Card</h3>
@@ -437,15 +493,14 @@
             <div class="container">
                 <div class="section-head reveal">
                     <span class="section-index mono">08</span>
-                    <h2 class="section-title">Let's Catalyze Something</h2>
+                    <h2 class="section-title">Get in Touch</h2>
                     <span class="section-rule"></span>
                 </div>
 
                 <div class="contact-panel reveal">
                     <p class="contact-lead">
                         I'm currently open to new opportunities and collaborations in process engineering,
-                        simulation and optimization. Reach out — my response time constant is small, and
-                        heat transfer is always faster with good contact.
+                        simulation and optimization. Reach out — I'll try my best to get back to you quickly.
                     </p>
 
                     <div class="contact-actions">
@@ -476,23 +531,8 @@
         </div>
     </footer>
 
-    <!-- ===== Skill Modal ===== -->
-    <div class="modal-overlay" id="modal-overlay">
-        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-            <header class="modal-head">
-                <span class="modal-sym mono" id="modal-sym">TP</span>
-                <h3 id="modal-title">Skill</h3>
-                <button class="icon-btn" id="modal-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-            </header>
-            <div class="modal-body">
-                <h4 class="mono">// What it is</h4>
-                <p id="modal-desc"></p>
-                <h4 class="mono">// What I did with it</h4>
-                <p id="modal-exp"></p>
-            </div>
-        </div>
-    </div>
-
+    <!-- Three.js (r128, vendored locally) -->
+    <script src="vendor/three.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

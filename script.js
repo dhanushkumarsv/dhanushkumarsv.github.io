@@ -1,11 +1,267 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const root = document.documentElement;
+    const isDark = () => root.getAttribute('data-theme') === 'dark';
+
+    /* ============================================================
+       3D PROCESS PLANT — interactive Three.js scene
+       Distillation columns, heat exchanger, storage tank and
+       pipework with animated product flow. Drag to rotate.
+       ============================================================ */
+    let setPlantTheme = () => {};
+
+    (function initPlant() {
+        const canvas = document.getElementById('plant-canvas');
+        if (!canvas || !window.THREE) return;
+
+        let renderer;
+        try {
+            renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        } catch (e) {
+            canvas.style.display = 'none';
+            return;
+        }
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 200);
+        camera.position.set(18.5, 10, 24);
+        camera.lookAt(6.8, 2.4, 0);
+
+        /* ---- Lights ---- */
+        const hemi = new THREE.HemisphereLight(0xffffff, 0xc8d6e6, 0.95);
+        scene.add(hemi);
+        const dir = new THREE.DirectionalLight(0xffffff, 0.85);
+        dir.position.set(6, 12, 8);
+        scene.add(dir);
+        const fill = new THREE.DirectionalLight(0xffffff, 0.25);
+        fill.position.set(-8, 4, -6);
+        scene.add(fill);
+
+        /* ---- Materials (recolored on theme change) ---- */
+        const matSteel  = new THREE.MeshStandardMaterial({ metalness: 0.55, roughness: 0.38 });
+        const matSteel2 = new THREE.MeshStandardMaterial({ metalness: 0.5,  roughness: 0.45 });
+        const matAccent = new THREE.MeshStandardMaterial({ metalness: 0.35, roughness: 0.3, emissiveIntensity: 0.35 });
+        const matPipe   = new THREE.MeshStandardMaterial({ metalness: 0.6,  roughness: 0.35 });
+        const matFlow   = new THREE.MeshStandardMaterial({ emissiveIntensity: 1.0, metalness: 0.1, roughness: 0.4 });
+        const matGround = new THREE.MeshStandardMaterial({ metalness: 0.1,  roughness: 0.95 });
+
+        const plant = new THREE.Group();
+        plant.position.set(8.2, 0, 0);
+        plant.scale.setScalar(0.82);
+        scene.add(plant);
+
+        /* ---- Ground pad + grid ---- */
+        const ground = new THREE.Mesh(new THREE.CylinderGeometry(11, 11, 0.18, 64), matGround);
+        ground.position.y = -0.09;
+        plant.add(ground);
+
+        let grid = null;
+        const buildGrid = (c1, c2) => {
+            if (grid) plant.remove(grid);
+            grid = new THREE.GridHelper(21, 21, c1, c2);
+            grid.position.y = 0.005;
+            grid.material.transparent = true;
+            grid.material.opacity = 0.35;
+            plant.add(grid);
+        };
+
+        /* ---- Equipment builders ---- */
+        const makeColumn = (r, h, x, z) => {
+            const g = new THREE.Group();
+            const body = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, 32), matSteel);
+            body.position.y = h / 2;
+            g.add(body);
+
+            const top = new THREE.Mesh(new THREE.SphereGeometry(r, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), matSteel);
+            top.position.y = h;
+            g.add(top);
+
+            const skirt = new THREE.Mesh(new THREE.CylinderGeometry(r * 1.15, r * 1.3, 0.5, 32), matSteel2);
+            skirt.position.y = 0.25;
+            g.add(skirt);
+
+            // Tray flanges
+            const nRings = Math.max(3, Math.round(h / 1.6));
+            for (let i = 1; i <= nRings; i++) {
+                const ring = new THREE.Mesh(new THREE.TorusGeometry(r + 0.02, 0.045, 10, 40), matSteel2);
+                ring.rotation.x = Math.PI / 2;
+                ring.position.y = (h / (nRings + 1)) * i;
+                g.add(ring);
+            }
+
+            // Accent collar near top
+            const collar = new THREE.Mesh(new THREE.TorusGeometry(r + 0.03, 0.07, 12, 44), matAccent);
+            collar.rotation.x = Math.PI / 2;
+            collar.position.y = h - 0.35;
+            g.add(collar);
+
+            g.position.set(x, 0, z);
+            plant.add(g);
+            return g;
+        };
+
+        const makeTank = (r, h, x, z) => {
+            const g = new THREE.Group();
+            const body = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, 36), matSteel2);
+            body.position.y = h / 2;
+            g.add(body);
+            const dome = new THREE.Mesh(new THREE.SphereGeometry(r, 36, 16, 0, Math.PI * 2, 0, Math.PI / 2), matSteel2);
+            dome.position.y = h;
+            g.add(dome);
+            const band = new THREE.Mesh(new THREE.TorusGeometry(r + 0.02, 0.05, 10, 44), matAccent);
+            band.rotation.x = Math.PI / 2;
+            band.position.y = h * 0.7;
+            g.add(band);
+            g.position.set(x, 0, z);
+            plant.add(g);
+            return g;
+        };
+
+        const makeExchanger = (r, len, x, y, z) => {
+            const g = new THREE.Group();
+            const shell = new THREE.Mesh(new THREE.CylinderGeometry(r, r, len, 28), matSteel);
+            shell.rotation.z = Math.PI / 2;
+            g.add(shell);
+            [-1, 1].forEach(s => {
+                const cap = new THREE.Mesh(new THREE.SphereGeometry(r, 28, 14, 0, Math.PI * 2, 0, Math.PI / 2), matAccent);
+                cap.rotation.z = s * -Math.PI / 2;
+                cap.position.x = s * len / 2;
+                g.add(cap);
+                const leg = new THREE.Mesh(new THREE.BoxGeometry(0.22, y, 0.7), matSteel2);
+                leg.position.set(s * len * 0.3, -y / 2, 0);
+                g.add(leg);
+            });
+            g.position.set(x, y, z);
+            plant.add(g);
+            return g;
+        };
+
+        makeColumn(1.15, 7.2, -4.2, 0.4);      // main distillation column
+        makeColumn(0.85, 5.4, -0.8, -2.2);     // secondary column
+        makeTank(1.5, 2.6, 4.2, 1.8);          // product storage tank
+        makeExchanger(0.62, 3.4, 2.0, 1.0, -2.6); // shell & tube heat exchanger
+
+        /* ---- Pipework (smooth tubes along 3D curves) ---- */
+        const V = (x, y, z) => new THREE.Vector3(x, y, z);
+        const pipeCurves = [
+            // feed line in → main column
+            new THREE.CatmullRomCurve3([V(-9.5, 0.6, 3.2), V(-7, 0.6, 2.6), V(-5.4, 2.4, 1.2), V(-4.2, 3.6, 0.5)]),
+            // main column top → secondary column top
+            new THREE.CatmullRomCurve3([V(-4.2, 7.6, 0.4), V(-3.4, 8.3, -0.6), V(-1.8, 7.0, -1.6), V(-0.8, 5.8, -2.2)]),
+            // secondary column bottom → heat exchanger
+            new THREE.CatmullRomCurve3([V(-0.8, 0.8, -2.2), V(0.2, 0.6, -2.5), V(0.9, 1.0, -2.6), V(1.6, 1.0, -2.6)]),
+            // heat exchanger → storage tank
+            new THREE.CatmullRomCurve3([V(3.7, 1.0, -2.6), V(4.6, 1.2, -1.6), V(4.8, 2.2, 0.2), V(4.2, 3.1, 1.7)]),
+            // tank → product out
+            new THREE.CatmullRomCurve3([V(4.2, 0.5, 3.2), V(5.4, 0.5, 4.4), V(7.4, 0.5, 5.2), V(9.6, 0.5, 5.6)])
+        ];
+
+        pipeCurves.forEach(curve => {
+            const tube = new THREE.Mesh(new THREE.TubeGeometry(curve, 64, 0.11, 12), matPipe);
+            plant.add(tube);
+        });
+
+        /* ---- Flow particles inside the pipes ---- */
+        const flowDots = [];
+        const dotGeo = new THREE.SphereGeometry(0.085, 10, 10);
+        pipeCurves.forEach(curve => {
+            const n = 6;
+            for (let i = 0; i < n; i++) {
+                const mesh = new THREE.Mesh(dotGeo, matFlow);
+                plant.add(mesh);
+                flowDots.push({ curve, mesh, t: i / n, speed: 0.0016 + Math.random() * 0.0011 });
+            }
+        });
+
+        /* ---- Theme-aware colors ---- */
+        setPlantTheme = (dark) => {
+            if (dark) {
+                matSteel.color.set(0x3a4f78);
+                matSteel2.color.set(0x2c3d5f);
+                matPipe.color.set(0x46587f);
+                matAccent.color.set(0x2dd4bf);
+                matAccent.emissive.set(0x2dd4bf);
+                matFlow.color.set(0x38bdf8);
+                matFlow.emissive.set(0x38bdf8);
+                matGround.color.set(0x0d1526);
+                hemi.color.set(0x9db4d8); hemi.groundColor.set(0x1a2540); hemi.intensity = 0.7;
+                dir.intensity = 0.7;
+                scene.fog = new THREE.Fog(0x070c18, 26, 56);
+                buildGrid(0x24365a, 0x18233c);
+            } else {
+                matSteel.color.set(0xc3d2e2);
+                matSteel2.color.set(0xa8bccf);
+                matPipe.color.set(0x93a9c0);
+                matAccent.color.set(0x0d9488);
+                matAccent.emissive.set(0x0d9488);
+                matFlow.color.set(0x0284c7);
+                matFlow.emissive.set(0x0284c7);
+                matGround.color.set(0xe2eaf3);
+                hemi.color.set(0xffffff); hemi.groundColor.set(0xc8d6e6); hemi.intensity = 0.95;
+                dir.intensity = 0.85;
+                scene.fog = new THREE.Fog(0xf4f7fb, 28, 58);
+                buildGrid(0xc4d2e2, 0xd9e3ee);
+            }
+        };
+        setPlantTheme(isDark());
+
+        /* ---- Drag to rotate ---- */
+        let autoRot = 0;
+        let dragRot = 0;
+        let dragging = false;
+        let lastX = 0;
+        const dragHint = document.getElementById('drag-hint');
+
+        canvas.addEventListener('pointerdown', (e) => {
+            dragging = true;
+            lastX = e.clientX;
+            if (dragHint) dragHint.classList.add('fade');
+        });
+        window.addEventListener('pointermove', (e) => {
+            if (!dragging) return;
+            dragRot += (e.clientX - lastX) * 0.006;
+            lastX = e.clientX;
+        });
+        window.addEventListener('pointerup', () => { dragging = false; });
+
+        /* ---- Resize ---- */
+        const resize = () => {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            renderer.setSize(rect.width, rect.height, false);
+            camera.aspect = rect.width / rect.height;
+            camera.updateProjectionMatrix();
+        };
+        resize();
+        window.addEventListener('resize', resize);
+
+        /* ---- Render loop ---- */
+        const render = () => {
+            plant.rotation.y = autoRot + dragRot;
+            flowDots.forEach(d => {
+                d.t = (d.t + d.speed) % 1;
+                d.mesh.position.copy(d.curve.getPointAt(d.t));
+            });
+            renderer.render(scene, camera);
+        };
+
+        if (prefersReducedMotion) {
+            render();
+            window.addEventListener('resize', render);
+        } else {
+            const loop = () => {
+                if (!dragging) autoRot += 0.0015;
+                render();
+                requestAnimationFrame(loop);
+            };
+            loop();
+        }
+    })();
 
     /* ===== Theme toggle (light default, dark optional) ===== */
     const themeBtn = document.getElementById('theme-toggle');
     const themeIcon = themeBtn.querySelector('i');
-    const root = document.documentElement;
 
     const applyTheme = (theme) => {
         if (theme === 'dark') {
@@ -17,6 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
             themeIcon.classList.remove('fa-sun');
             themeIcon.classList.add('fa-moon');
         }
+        setPlantTheme(theme === 'dark');
     };
 
     applyTheme(localStorage.getItem('theme') || 'light');
@@ -70,11 +327,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ===== Typed hero roles ===== */
     const roles = [
-        'Chemical & Process Engineer',
-        'Transport Phenomena · Fluid Dynamics',
-        'Heat Transfer & Thermodynamics',
+        'Process Engineer',
         'Process Simulation & Optimization',
-        'Aspen Plus | HYSYS | GAMS'
+        'Aspen Plus | HYSYS | MATLAB | GAMS',
+        'Yield Improvement & Process Integration'
     ];
     const typedEl = document.getElementById('typed-role');
 
@@ -132,236 +388,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    /* ===== Skill modal ===== */
-    const skillData = {
-        'Transport Phenomena': {
-            sym: 'TP',
-            desc: 'The unified study of momentum, heat and mass transfer — the framework that connects molecular mechanisms to equipment-scale behaviour in every chemical process.',
-            exp: 'Applied coupled heat and mass transfer analysis to membrane distillation (VMD-MED / MSF-MED) modeling and photocatalytic reactor design, linking driving forces to recovery and yield.'
-        },
-        'Fluid Dynamics': {
-            sym: 'FD',
-            desc: 'The study of fluid flow — from laminar and turbulent regimes to pressure drop, mixing and computational fluid dynamics (CFD).',
-            exp: 'Performed CFD analysis of chemical processes as a research intern at IIT Indore, learning parameter optimization and flow-field reporting techniques.'
-        },
-        'Heat Transfer': {
-            sym: 'HT',
-            desc: 'Conduction, convection and radiation analysis — sizing exchangers, evaporators and thermal separation systems.',
-            exp: 'Performed energy analysis of multi-effect distillation (MED) and multi-stage flash (MSF) configurations to improve water recovery and overall thermal efficiency.'
-        },
-        'Thermodynamics': {
-            sym: 'TD',
-            desc: 'Phase equilibria, property models and energy balances — the foundation of every flowsheet simulation and separation design.',
-            exp: 'Selected and applied thermodynamic property packages in Aspen Plus and HYSYS for distillation, desalination and purification process models.'
-        },
-        'Aspen Plus': {
-            sym: 'AP',
-            desc: 'A leading chemical process simulation software used by the bulk, fine, specialty and biochemical industries for modeling, design and optimization.',
-            exp: 'Modeled hybrid VMD-MED and MSF-MED systems for phosphogypsum wastewater purification, and guided students through process simulation as a Teaching Assistant at NCHU.'
-        },
-        'Aspen HYSYS': {
-            sym: 'HY',
-            desc: 'A process simulation tool for the energy industry, used for optimizing the performance of oil, gas and chemical processes.',
-            exp: 'Used for modeling and simulating chemical and energy-related processes, ensuring optimal operational parameters.'
-        },
-        'MATLAB': {
-            sym: 'ML',
-            desc: 'A multi-paradigm programming language and numeric computing environment for engineering and science.',
-            exp: 'Used for complex mathematical modeling, data analysis and algorithm development for process optimization.'
-        },
-        'GAMS': {
-            sym: 'GA',
-            desc: 'General Algebraic Modeling System — a high-level modeling system for mathematical optimization problems.',
-            exp: 'Formulated a MILP model for integrated milk procurement under capacity, flow-balance and service constraints, achieving ~17% total cost reduction.'
-        },
-        'Electrochemical Coating': {
-            sym: 'EC',
-            desc: 'A process that uses electrical current to deposit a thin, coherent metal coating on an electrode surface.',
-            exp: 'Studied electrochemical coating and metallization methods at RK Metals; evaluated thickness, adhesion and corrosion resistance.'
-        },
-        'Surface Process Modeling': {
-            sym: 'SM',
-            desc: 'Modeling of physical and chemical processes occurring at solid surfaces and interfaces.',
-            exp: 'Applied surface-processing principles to evaluate coating performance and improve material characteristics.'
-        },
-        'Yield Optimization': {
-            sym: 'YO',
-            desc: 'Identifying and reducing sources of yield loss in manufacturing to maximize output and quality.',
-            exp: 'Analyzed production data from hot and cold rolling lines at SAIL to identify factors affecting steel yield; investigated manufacturing defects via root cause analysis.'
-        },
-        'Origin': {
-            sym: 'OG',
-            desc: 'A professional software package for interactive scientific graphing and data analysis.',
-            exp: 'Used for plotting experimental data and analyzing results from chemical engineering processes and material tests.'
-        },
-        'Excel': {
-            sym: 'EX',
-            desc: 'Spreadsheet software featuring calculation, graphing tools and pivot tables for engineering data work.',
-            exp: 'Used extensively for data organization, statistical analysis and managing process parameters across projects.'
-        },
-        'ImageJ': {
-            sym: 'IJ',
-            desc: 'A Java-based image processing program developed at the National Institutes of Health.',
-            exp: 'Analyzed microscopic images of coatings and materials to determine surface properties and defect sizes.'
-        },
-        'Python': {
-            sym: 'PY',
-            desc: 'A high-level, general-purpose programming language widely used for data work and automation.',
-            exp: 'Applied scripting for data manipulation, automation of repetitive tasks and preliminary data analysis.'
-        },
-        'Process Flow Reports': {
-            sym: 'PF',
-            desc: 'Documentation detailing the sequence of operations in a process, including flowcharts and key parameters.',
-            exp: 'Drafted comprehensive reports detailing process models, optimization results and technical specifications.'
-        },
-        'Design of Experiments': {
-            sym: 'DE',
-            desc: 'A systematic method to determine the relationship between factors affecting a process and its output.',
-            exp: 'Applied DOE principles to structure experiments for photocatalytic hydrogen production and coating tests.'
-        },
-        'Technical Writing': {
-            sym: 'TW',
-            desc: 'Clear, structured communication of complex technical information for engineering and research audiences.',
-            exp: 'Authored technical publications including papers for ICATES 2023 and 2024, distilling complex research into accessible formats.'
-        }
-    };
-
-    const modalOverlay = document.getElementById('modal-overlay');
-    const modalSym = document.getElementById('modal-sym');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDesc = document.getElementById('modal-desc');
-    const modalExp = document.getElementById('modal-exp');
-    const modalClose = document.getElementById('modal-close');
-
-    document.querySelectorAll('.tag-card').forEach(el => {
-        el.addEventListener('click', () => {
-            const skill = el.dataset.skill;
-            const data = skillData[skill];
-            if (!data) return;
-            modalSym.textContent = data.sym;
-            modalTitle.textContent = skill;
-            modalDesc.textContent = data.desc;
-            modalExp.textContent = data.exp;
-            modalOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
+    /* ===== 3D tilt on cards ===== */
+    if (!prefersReducedMotion && window.matchMedia('(hover: hover)').matches) {
+        document.querySelectorAll('.tilt').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                card.style.transform =
+                    `perspective(900px) rotateX(${(-y * 7).toFixed(2)}deg) rotateY(${(x * 7).toFixed(2)}deg) translateY(-4px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
         });
-    });
-
-    const closeModal = () => {
-        modalOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    };
-    modalClose.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-
-    /* ===== Hero canvas: potential flow past a cylinder =====
-       Real fluid mechanics: the analytic 2D potential-flow solution
-       u = U(1 - R²(x²-y²)/r⁴), v = -2UR²xy/r⁴.
-       Tracer particles are advected through the field and coloured by
-       local speed (blue = stagnation, red = 2U at the cylinder crown),
-       like a CFD velocity-magnitude plot. */
-    const canvas = document.getElementById('flow-canvas');
-    if (canvas && !prefersReducedMotion) {
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let w, h, R, cx, cy, raf;
-
-        const U = 1.0;          // freestream velocity (px/frame, scaled below)
-        const SPEED_SCALE = 1.8;
-
-        const isDark = () => root.getAttribute('data-theme') === 'dark';
-
-        const spawn = (anywhere) => ({
-            x: anywhere ? Math.random() * w : -5 - Math.random() * 40,
-            y: Math.random() * h,
-            px: null, py: null,
-            life: 200 + Math.random() * 400
-        });
-
-        const resize = () => {
-            const rect = canvas.parentElement.getBoundingClientRect();
-            w = canvas.width = rect.width;
-            h = canvas.height = rect.height;
-
-            R = Math.min(w, h) * 0.16;
-            cx = w * 0.28;
-            cy = h * 0.58;
-
-            const count = Math.min(260, Math.floor((w * h) / 5500));
-            particles = Array.from({ length: count }, () => spawn(true));
-        };
-
-        // Analytic potential-flow velocity at (x, y)
-        const velocity = (x, y) => {
-            const dx = x - cx, dy = y - cy;
-            const r2 = dx * dx + dy * dy;
-            if (r2 < 1e-6) return { u: 0, v: 0, s: 0 };
-            const k = (R * R) / (r2 * r2);
-            const u = U * (1 - k * (dx * dx - dy * dy));
-            const v = -U * 2 * k * dx * dy;
-            return { u, v, s: Math.hypot(u, v) };
-        };
-
-        // CFD-style colormap: slow = blue (hue 225), fast = red (hue 0)
-        const speedColor = (s, alpha) => {
-            const t = Math.min(s / (2 * U), 1);
-            const hue = 225 * (1 - t);
-            const light = isDark() ? 60 : 45;
-            return `hsla(${hue}, 85%, ${light}%, ${alpha})`;
-        };
-
-        const draw = () => {
-            ctx.clearRect(0, 0, w, h);
-            const dark = isDark();
-
-            // The cylinder (the obstacle the flow bends around)
-            ctx.beginPath();
-            ctx.arc(cx, cy, R, 0, Math.PI * 2);
-            ctx.fillStyle = dark ? 'rgba(22, 34, 58, 0.55)' : 'rgba(216, 226, 238, 0.55)';
-            ctx.fill();
-            ctx.setLineDash([6, 6]);
-            ctx.strokeStyle = dark ? 'rgba(147, 164, 189, 0.35)' : 'rgba(70, 88, 111, 0.3)';
-            ctx.lineWidth = 1.2;
-            ctx.stroke();
-            ctx.setLineDash([]);
-
-            // Freestream annotation
-            ctx.font = '12px "JetBrains Mono", monospace';
-            ctx.fillStyle = dark ? 'rgba(147, 164, 189, 0.45)' : 'rgba(70, 88, 111, 0.45)';
-            ctx.fillText('U∞ →', 18, cy + 4);
-
-            for (let i = 0; i < particles.length; i++) {
-                const p = particles[i];
-                const { u, v, s } = velocity(p.x, p.y);
-
-                p.px = p.x; p.py = p.y;
-                p.x += u * SPEED_SCALE;
-                p.y += v * SPEED_SCALE;
-                p.life--;
-
-                const dx = p.x - cx, dy = p.y - cy;
-                if (p.x > w + 10 || p.y < -10 || p.y > h + 10 ||
-                    dx * dx + dy * dy < (R + 1) * (R + 1) ||
-                    p.life <= 0 || s < 0.02) {
-                    particles[i] = spawn(false);
-                    continue;
-                }
-
-                ctx.beginPath();
-                ctx.moveTo(p.px, p.py);
-                ctx.lineTo(p.x, p.y);
-                ctx.strokeStyle = speedColor(s, dark ? 0.55 : 0.5);
-                ctx.lineWidth = 1.6;
-                ctx.lineCap = 'round';
-                ctx.stroke();
-            }
-            raf = requestAnimationFrame(draw);
-        };
-
-        resize();
-        draw();
-        window.addEventListener('resize', () => { cancelAnimationFrame(raf); resize(); draw(); });
     }
+
+    /* ===== Flip cards: tap support for touch devices ===== */
+    document.querySelectorAll('.flip-card').forEach(card => {
+        card.addEventListener('click', () => card.classList.toggle('flipped'));
+    });
 
 });
