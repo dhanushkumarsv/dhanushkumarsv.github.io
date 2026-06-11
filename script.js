@@ -2,25 +2,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* ===== Theme toggle (dark default) ===== */
+    /* ===== Theme toggle (light default, dark optional) ===== */
     const themeBtn = document.getElementById('theme-toggle');
     const themeIcon = themeBtn.querySelector('i');
     const root = document.documentElement;
 
     const applyTheme = (theme) => {
-        if (theme === 'light') {
-            root.setAttribute('data-theme', 'light');
-            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        if (theme === 'dark') {
+            root.setAttribute('data-theme', 'dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
         } else {
             root.removeAttribute('data-theme');
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
         }
     };
 
-    applyTheme(localStorage.getItem('theme') || 'dark');
+    applyTheme(localStorage.getItem('theme') || 'light');
 
     themeBtn.addEventListener('click', () => {
-        const next = root.hasAttribute('data-theme') ? 'dark' : 'light';
+        const next = root.hasAttribute('data-theme') ? 'light' : 'dark';
         localStorage.setItem('theme', next);
         applyTheme(next);
     });
@@ -68,11 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ===== Typed hero roles ===== */
     const roles = [
-        'Process Engineer',
-        'Process Simulation Specialist',
-        'Yield Optimization Enthusiast',
-        'Aspen Plus | HYSYS | GAMS',
-        'M.S. Chemical Engineering'
+        'Chemical & Process Engineer',
+        'Transport Phenomena · Fluid Dynamics',
+        'Heat Transfer & Thermodynamics',
+        'Process Simulation & Optimization',
+        'Aspen Plus | HYSYS | GAMS'
     ];
     const typedEl = document.getElementById('typed-role');
 
@@ -132,73 +134,93 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ===== Skill modal ===== */
     const skillData = {
+        'Transport Phenomena': {
+            sym: 'TP',
+            desc: 'The unified study of momentum, heat and mass transfer — the framework that connects molecular mechanisms to equipment-scale behaviour in every chemical process.',
+            exp: 'Applied coupled heat and mass transfer analysis to membrane distillation (VMD-MED / MSF-MED) modeling and photocatalytic reactor design, linking driving forces to recovery and yield.'
+        },
+        'Fluid Dynamics': {
+            sym: 'FD',
+            desc: 'The study of fluid flow — from laminar and turbulent regimes to pressure drop, mixing and computational fluid dynamics (CFD).',
+            exp: 'Performed CFD analysis of chemical processes as a research intern at IIT Indore, learning parameter optimization and flow-field reporting techniques.'
+        },
+        'Heat Transfer': {
+            sym: 'HT',
+            desc: 'Conduction, convection and radiation analysis — sizing exchangers, evaporators and thermal separation systems.',
+            exp: 'Performed energy analysis of multi-effect distillation (MED) and multi-stage flash (MSF) configurations to improve water recovery and overall thermal efficiency.'
+        },
+        'Thermodynamics': {
+            sym: 'TD',
+            desc: 'Phase equilibria, property models and energy balances — the foundation of every flowsheet simulation and separation design.',
+            exp: 'Selected and applied thermodynamic property packages in Aspen Plus and HYSYS for distillation, desalination and purification process models.'
+        },
         'Aspen Plus': {
-            sym: 'Ap',
+            sym: 'AP',
             desc: 'A leading chemical process simulation software used by the bulk, fine, specialty and biochemical industries for modeling, design and optimization.',
             exp: 'Modeled hybrid VMD-MED and MSF-MED systems for phosphogypsum wastewater purification, and guided students through process simulation as a Teaching Assistant at NCHU.'
         },
         'Aspen HYSYS': {
-            sym: 'Hy',
+            sym: 'HY',
             desc: 'A process simulation tool for the energy industry, used for optimizing the performance of oil, gas and chemical processes.',
             exp: 'Used for modeling and simulating chemical and energy-related processes, ensuring optimal operational parameters.'
         },
         'MATLAB': {
-            sym: 'Ml',
+            sym: 'ML',
             desc: 'A multi-paradigm programming language and numeric computing environment for engineering and science.',
             exp: 'Used for complex mathematical modeling, data analysis and algorithm development for process optimization.'
         },
         'GAMS': {
-            sym: 'Ga',
+            sym: 'GA',
             desc: 'General Algebraic Modeling System — a high-level modeling system for mathematical optimization problems.',
             exp: 'Formulated a MILP model for integrated milk procurement under capacity, flow-balance and service constraints, achieving ~17% total cost reduction.'
         },
         'Electrochemical Coating': {
-            sym: 'Ec',
+            sym: 'EC',
             desc: 'A process that uses electrical current to deposit a thin, coherent metal coating on an electrode surface.',
             exp: 'Studied electrochemical coating and metallization methods at RK Metals; evaluated thickness, adhesion and corrosion resistance.'
         },
         'Surface Process Modeling': {
-            sym: 'Sp',
+            sym: 'SM',
             desc: 'Modeling of physical and chemical processes occurring at solid surfaces and interfaces.',
             exp: 'Applied surface-processing principles to evaluate coating performance and improve material characteristics.'
         },
         'Yield Optimization': {
-            sym: 'Yo',
+            sym: 'YO',
             desc: 'Identifying and reducing sources of yield loss in manufacturing to maximize output and quality.',
             exp: 'Analyzed production data from hot and cold rolling lines at SAIL to identify factors affecting steel yield; investigated manufacturing defects via root cause analysis.'
         },
         'Origin': {
-            sym: 'Og',
+            sym: 'OG',
             desc: 'A professional software package for interactive scientific graphing and data analysis.',
             exp: 'Used for plotting experimental data and analyzing results from chemical engineering processes and material tests.'
         },
         'Excel': {
-            sym: 'Ex',
+            sym: 'EX',
             desc: 'Spreadsheet software featuring calculation, graphing tools and pivot tables for engineering data work.',
             exp: 'Used extensively for data organization, statistical analysis and managing process parameters across projects.'
         },
         'ImageJ': {
-            sym: 'Ij',
+            sym: 'IJ',
             desc: 'A Java-based image processing program developed at the National Institutes of Health.',
             exp: 'Analyzed microscopic images of coatings and materials to determine surface properties and defect sizes.'
         },
         'Python': {
-            sym: 'Py',
+            sym: 'PY',
             desc: 'A high-level, general-purpose programming language widely used for data work and automation.',
             exp: 'Applied scripting for data manipulation, automation of repetitive tasks and preliminary data analysis.'
         },
         'Process Flow Reports': {
-            sym: 'Pf',
+            sym: 'PF',
             desc: 'Documentation detailing the sequence of operations in a process, including flowcharts and key parameters.',
             exp: 'Drafted comprehensive reports detailing process models, optimization results and technical specifications.'
         },
         'Design of Experiments': {
-            sym: 'De',
+            sym: 'DE',
             desc: 'A systematic method to determine the relationship between factors affecting a process and its output.',
             exp: 'Applied DOE principles to structure experiments for photocatalytic hydrogen production and coating tests.'
         },
         'Technical Writing': {
-            sym: 'Tw',
+            sym: 'TW',
             desc: 'Clear, structured communication of complex technical information for engineering and research audiences.',
             exp: 'Authored technical publications including papers for ICATES 2023 and 2024, distilling complex research into accessible formats.'
         }
@@ -211,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalExp = document.getElementById('modal-exp');
     const modalClose = document.getElementById('modal-close');
 
-    document.querySelectorAll('.element').forEach(el => {
+    document.querySelectorAll('.tag-card').forEach(el => {
         el.addEventListener('click', () => {
             const skill = el.dataset.skill;
             const data = skillData[skill];
@@ -233,62 +255,106 @@ document.addEventListener('DOMContentLoaded', () => {
     modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-    /* ===== Molecule canvas (hero background) ===== */
-    const canvas = document.getElementById('molecule-canvas');
+    /* ===== Hero canvas: potential flow past a cylinder =====
+       Real fluid mechanics: the analytic 2D potential-flow solution
+       u = U(1 - R²(x²-y²)/r⁴), v = -2UR²xy/r⁴.
+       Tracer particles are advected through the field and coloured by
+       local speed (blue = stagnation, red = 2U at the cylinder crown),
+       like a CFD velocity-magnitude plot. */
+    const canvas = document.getElementById('flow-canvas');
     if (canvas && !prefersReducedMotion) {
         const ctx = canvas.getContext('2d');
-        let atoms = [];
-        let w, h, raf;
+        let particles = [];
+        let w, h, R, cx, cy, raf;
 
-        const accent = () => root.hasAttribute('data-theme')
-            ? { atom: 'rgba(13, 148, 136, 0.55)', bond: '13, 148, 136' }
-            : { atom: 'rgba(45, 212, 191, 0.55)', bond: '45, 212, 191' };
+        const U = 1.0;          // freestream velocity (px/frame, scaled below)
+        const SPEED_SCALE = 1.8;
+
+        const isDark = () => root.getAttribute('data-theme') === 'dark';
+
+        const spawn = (anywhere) => ({
+            x: anywhere ? Math.random() * w : -5 - Math.random() * 40,
+            y: Math.random() * h,
+            px: null, py: null,
+            life: 200 + Math.random() * 400
+        });
 
         const resize = () => {
             const rect = canvas.parentElement.getBoundingClientRect();
             w = canvas.width = rect.width;
             h = canvas.height = rect.height;
 
-            const count = Math.min(90, Math.floor((w * h) / 16000));
-            atoms = Array.from({ length: count }, () => ({
-                x: Math.random() * w,
-                y: Math.random() * h,
-                vx: (Math.random() - 0.5) * 0.45,
-                vy: (Math.random() - 0.5) * 0.45,
-                r: Math.random() * 2.2 + 1.2
-            }));
+            R = Math.min(w, h) * 0.16;
+            cx = w * 0.28;
+            cy = h * 0.58;
+
+            const count = Math.min(260, Math.floor((w * h) / 5500));
+            particles = Array.from({ length: count }, () => spawn(true));
         };
 
-        const BOND_DIST = 130;
+        // Analytic potential-flow velocity at (x, y)
+        const velocity = (x, y) => {
+            const dx = x - cx, dy = y - cy;
+            const r2 = dx * dx + dy * dy;
+            if (r2 < 1e-6) return { u: 0, v: 0, s: 0 };
+            const k = (R * R) / (r2 * r2);
+            const u = U * (1 - k * (dx * dx - dy * dy));
+            const v = -U * 2 * k * dx * dy;
+            return { u, v, s: Math.hypot(u, v) };
+        };
+
+        // CFD-style colormap: slow = blue (hue 225), fast = red (hue 0)
+        const speedColor = (s, alpha) => {
+            const t = Math.min(s / (2 * U), 1);
+            const hue = 225 * (1 - t);
+            const light = isDark() ? 60 : 45;
+            return `hsla(${hue}, 85%, ${light}%, ${alpha})`;
+        };
 
         const draw = () => {
             ctx.clearRect(0, 0, w, h);
-            const c = accent();
+            const dark = isDark();
 
-            for (let i = 0; i < atoms.length; i++) {
-                const a = atoms[i];
-                a.x += a.vx; a.y += a.vy;
-                if (a.x < 0 || a.x > w) a.vx *= -1;
-                if (a.y < 0 || a.y > h) a.vy *= -1;
+            // The cylinder (the obstacle the flow bends around)
+            ctx.beginPath();
+            ctx.arc(cx, cy, R, 0, Math.PI * 2);
+            ctx.fillStyle = dark ? 'rgba(22, 34, 58, 0.55)' : 'rgba(216, 226, 238, 0.55)';
+            ctx.fill();
+            ctx.setLineDash([6, 6]);
+            ctx.strokeStyle = dark ? 'rgba(147, 164, 189, 0.35)' : 'rgba(70, 88, 111, 0.3)';
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Freestream annotation
+            ctx.font = '12px "JetBrains Mono", monospace';
+            ctx.fillStyle = dark ? 'rgba(147, 164, 189, 0.45)' : 'rgba(70, 88, 111, 0.45)';
+            ctx.fillText('U∞ →', 18, cy + 4);
+
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                const { u, v, s } = velocity(p.x, p.y);
+
+                p.px = p.x; p.py = p.y;
+                p.x += u * SPEED_SCALE;
+                p.y += v * SPEED_SCALE;
+                p.life--;
+
+                const dx = p.x - cx, dy = p.y - cy;
+                if (p.x > w + 10 || p.y < -10 || p.y > h + 10 ||
+                    dx * dx + dy * dy < (R + 1) * (R + 1) ||
+                    p.life <= 0 || s < 0.02) {
+                    particles[i] = spawn(false);
+                    continue;
+                }
 
                 ctx.beginPath();
-                ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
-                ctx.fillStyle = c.atom;
-                ctx.fill();
-
-                for (let j = i + 1; j < atoms.length; j++) {
-                    const b = atoms[j];
-                    const dx = a.x - b.x, dy = a.y - b.y;
-                    const dist = Math.hypot(dx, dy);
-                    if (dist < BOND_DIST) {
-                        ctx.beginPath();
-                        ctx.moveTo(a.x, a.y);
-                        ctx.lineTo(b.x, b.y);
-                        ctx.strokeStyle = `rgba(${c.bond}, ${0.16 * (1 - dist / BOND_DIST)})`;
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                    }
-                }
+                ctx.moveTo(p.px, p.py);
+                ctx.lineTo(p.x, p.y);
+                ctx.strokeStyle = speedColor(s, dark ? 0.55 : 0.5);
+                ctx.lineWidth = 1.6;
+                ctx.lineCap = 'round';
+                ctx.stroke();
             }
             raf = requestAnimationFrame(draw);
         };

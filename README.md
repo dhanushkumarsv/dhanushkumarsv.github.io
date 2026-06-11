@@ -3,16 +3,20 @@
 Personal portfolio of **Dhanush Kumar S V**, Process Engineer — live at
 [dhanushkumarsv.github.io](https://dhanushkumarsv.github.io).
 
-## Molecular Lab Theme
+## Process Engineering Theme
 
 A chemical-engineering-inspired design built with pure HTML, CSS and JavaScript
 (no frameworks, no build step — GitHub Pages ready):
 
-- **Animated molecule canvas** — atoms and bonds drift behind the hero section
-- **Periodic table of skills** — every skill rendered as a clickable element tile
-  with category color coding and a detail modal
-- **Process-flow timeline** — internships displayed as hexagonal flow nodes
-- **Dark / light theme** toggle with saved preference
+- **Real-physics hero animation** — the analytic potential-flow solution for
+  flow past a cylinder, with tracer particles coloured by velocity magnitude
+  like a CFD plot
+- **P&ID instrument-tag skills** — every skill rendered as an ISA-style
+  instrument bubble (TP-101, FD-102, …) with category colors and a detail modal
+- **Core fundamentals first** — transport phenomena, fluid dynamics & CFD,
+  heat transfer, thermodynamics
+- **Process-flow timeline** — internships displayed as instrument-circle nodes
+- **Light theme by default** with a dark-mode toggle and saved preference
 - **Downloads section** — resume PDF and vCard contact card
 - Scroll progress bar, scroll-spy navigation, animated stats and GPA bars
 - Fully responsive with reduced-motion support
