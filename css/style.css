@@ -1035,7 +1035,7 @@ body.genjutsu section {
 /* Profile Pictures based on Theme */
 .profile-pic-container {
   width: 100%;
-  aspect-ratio: 4/5;
+  aspect-ratio: 3/4;
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
