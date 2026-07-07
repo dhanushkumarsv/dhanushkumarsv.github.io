@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="pro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhanush Kumar S V — Process Engineer</title>
+  <meta name="description" content="Portfolio of Dhanush Kumar S V — Process Engineer specializing in process simulation, optimization, and manufacturing improvement." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bebas+Neue&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Space+Grotesk:wght@400;500;600;700&family=Luckiest+Guy&family=Bangers&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚗️</text></svg>" />
+</head>
+<body>
+  <div id="preloader" aria-hidden="true">
+    <div class="pre-badge">DK</div>
+    <div class="pre-bar"><span></span></div>
+  </div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+  <div id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="logo">
+        <span class="logo-badge">DK</span>
+        <span class="logo-text">Dhanush<span class="logo-dot">.</span></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#research">Research</a>
+        <a href="#experience">Experience</a>
+        <a href="#publications">Publications</a>
+        <a href="#resume">Resume</a>
+        <a href="#chatbot">Ask Me</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-right">
+        <!-- Theme switcher: two professional modes. Character themes live in the vault below. -->
+        <div class="theme-switcher" role="group" aria-label="Choose theme">
+          <button class="theme-btn" data-set-theme="pro" title="Light — warm professional" aria-label="Light professional theme">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.4" fill="currentColor" stroke="none"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>
+          </button>
+          <button class="theme-btn" data-set-theme="noir" title="Dark — midnight professional" aria-label="Dark professional theme">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 14.2A8.8 8.8 0 0 1 9.8 3.6 8.8 8.8 0 1 0 20.4 14.2z"/><path d="M17.2 4.6l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6z"/></svg>
+          </button>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="hero">
+    <!-- Theme decorations: each theme has its own signature backdrop -->
+    <div class="hero-decor decor-spidey" aria-hidden="true">
+      <div class="spidey-wedge"></div>
+      <div class="spidey-stripes"></div>
+      <svg class="spidey-emblem" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" stroke-width="7" stroke-linecap="round">
+          <path d="M105 66 C115 57 123 44 126 27 C127 23 128 19 129 14"/>
+          <path d="M110 78 C126 71 139 60 148 44 C150 40 152 37 154 33"/>
+          <path d="M111 91 C129 93 144 102 155 118 C157 121 159 125 161 129"/>
+          <path d="M107 103 C119 117 126 137 128 161 C128 166 129 171 129 176"/>
+          <path d="M95 66 C85 57 77 44 74 27 C73 23 72 19 71 14"/>
+          <path d="M90 78 C74 71 61 60 52 44 C50 40 48 37 46 33"/>
+          <path d="M89 91 C71 93 56 102 45 118 C43 121 41 125 39 129"/>
+          <path d="M93 103 C81 117 74 137 72 161 C72 166 71 171 71 176"/>
+        </g>
+        <ellipse cx="100" cy="74" rx="12" ry="15" fill="currentColor"/>
+        <path fill="currentColor" d="M100 88c11 0 16 11 15 26-1 18-7 38-15 58-8-20-14-40-15-58-1-15 4-26 15-26z"/>
+      </svg>
+    </div>
+    <div class="hero-decor decor-batman" aria-hidden="true">
+      <div class="bat-signal"></div>
+      <div class="beam beam-l"></div>
+      <div class="beam beam-r"></div>
+      <svg class="skyline" viewBox="0 0 1440 220" preserveAspectRatio="none" fill="currentColor">
+        <path d="M0 220 L0 140 L40 140 L40 100 L60 100 L60 60 L75 60 L75 100 L95 100 L95 140 L130 140 L130 90 L180 90 L180 40 L195 40 L195 20 L205 20 L205 40 L220 40 L220 90 L260 90 L260 150 L300 150 L300 110 L340 110 L340 70 L360 70 L360 110 L400 110 L400 150 L460 150 L460 80 L470 80 L470 55 L480 55 L480 80 L530 80 L530 150 L580 150 L580 120 L640 120 L640 50 L655 50 L655 30 L665 30 L665 50 L680 50 L680 120 L740 120 L740 160 L800 160 L800 100 L850 100 L850 60 L870 60 L870 100 L920 100 L920 160 L980 160 L980 110 L1030 110 L1030 70 L1045 70 L1045 45 L1055 45 L1055 70 L1070 70 L1070 110 L1120 110 L1120 160 L1180 160 L1180 90 L1240 90 L1240 130 L1300 130 L1300 80 L1330 80 L1330 40 L1345 40 L1345 80 L1380 80 L1380 130 L1440 130 L1440 220 Z"/>
+      </svg>
+    </div>
+    <div class="hero-decor decor-pro" aria-hidden="true">
+      <div class="pro-grid"></div>
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+    </div>
+    <div class="hero-decor decor-noir" aria-hidden="true">
+      <div class="noir-grid"></div>
+      <div class="noir-aurora noir-a1"></div>
+      <div class="noir-aurora noir-a2"></div>
+    </div>
+    <div class="hero-decor decor-luffy" aria-hidden="true">
+      <div class="luffy-sun"></div>
+      <svg class="luffy-waves" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#1273b5" opacity=".16" d="M0 80 C120 40 240 120 360 90 C480 60 600 110 720 85 C840 60 960 115 1080 88 C1200 62 1320 105 1440 78 L1440 160 L0 160 Z"/>
+        <path fill="#1273b5" opacity=".26" d="M0 115 C150 90 300 135 450 115 C600 95 750 135 900 118 C1050 100 1250 135 1440 112 L1440 160 L0 160 Z"/>
+      </svg>
+      <svg class="luffy-hat" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40 84 C40 40 72 20 100 20 C128 20 160 40 160 84 Z" fill="#e9c05b"/>
+        <rect x="40" y="66" width="120" height="17" rx="8" fill="#c0392b"/>
+        <ellipse cx="100" cy="88" rx="94" ry="20" fill="#dfb551"/>
+        <ellipse cx="100" cy="85" rx="94" ry="18" fill="#eec764"/>
+      </svg>
+    </div>
+    <div class="hero-decor decor-naruto" aria-hidden="true">
+      <div class="naruto-rays"></div>
+      <svg class="naruto-swirl" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path stroke="currentColor" stroke-width="11" stroke-linecap="round" d="M52 100 A48 48 0 1 1 148 100 A38 38 0 1 1 72 100 A28 28 0 1 1 128 100 A18 18 0 1 1 92 100 A8 8 0 1 1 108 100"/>
+        <path fill="currentColor" d="M148 100l34-12-10 26z"/>
+      </svg>
+    </div>
+    <div class="hero-decor decor-cap" aria-hidden="true">
+      <svg class="cap-shield" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="98" fill="#b31942"/>
+        <circle cx="100" cy="100" r="74" fill="#f5f7fa"/>
+        <circle cx="100" cy="100" r="50" fill="#b31942"/>
+        <circle cx="100" cy="100" r="28" fill="#0a3161"/>
+        <path fill="#f5f7fa" d="M100 76l7 14.9 16.4 2-12 11.3 3 16.2-14.4-7.9-14.4 7.9 3-16.2-12-11.3 16.4-2z"/>
+      </svg>
+      <svg class="cap-stars" viewBox="0 0 220 160" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40 20l4.4 9.4 10.3 1.2-7.6 7 2 10.2-9.1-5-9.1 5 2-10.2-7.6-7 10.3-1.2z"/>
+        <path d="M150 45l3.3 7 7.7.9-5.7 5.3 1.5 7.6-6.8-3.7-6.8 3.7 1.5-7.6-5.7-5.3 7.7-.9z" opacity=".7"/>
+        <path d="M85 105l2.6 5.6 6.2.7-4.6 4.2 1.2 6.1-5.4-3-5.4 3 1.2-6.1-4.6-4.2 6.2-.7z" opacity=".5"/>
+      </svg>
+      <div class="cap-stripes"></div>
+    </div>
+    <div class="hero-decor decor-vinland" aria-hidden="true">
+      <div class="vin-sun"></div>
+      <svg class="vin-hills" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#7a9e6e" opacity=".45" d="M0 120 C240 60 480 140 720 110 C960 80 1200 150 1440 100 L1440 200 L0 200 Z"/>
+        <path fill="#8a5a2b" opacity=".38" d="M0 160 C300 120 600 180 900 150 C1100 132 1300 170 1440 150 L1440 200 L0 200 Z"/>
+      </svg>
+      <svg class="vin-wheat vin-wheat-l" viewBox="0 0 120 170" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M60 170 C60 120 58 80 62 30" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M62 30q-16-4-20-24 18 2 20 24z"/><path d="M62 30q16-4 20-24-18 2-20 24z"/>
+        <path d="M61 52q-16-4-20-24 18 2 20 24z"/><path d="M61 52q16-4 20-24-18 2-20 24z"/>
+        <path d="M60 74q-16-4-20-24 18 2 20 24z"/><path d="M60 74q16-4 20-24-18 2-20 24z"/>
+        <path d="M30 170 C32 140 30 120 34 92" stroke="currentColor" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+        <path d="M34 92q-12-3-15-18 14 1 15 18z"/><path d="M34 92q12-3 15-18-14 1-15 18z"/>
+        <path d="M92 170 C90 145 92 128 88 104" stroke="currentColor" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+        <path d="M88 104q-12-3-15-18 14 1 15 18z"/><path d="M88 104q12-3 15-18-14 1-15 18z"/>
+      </svg>
+      <svg class="vin-wheat vin-wheat-r" viewBox="0 0 120 170" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M60 170 C60 120 58 80 62 30" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M62 30q-16-4-20-24 18 2 20 24z"/><path d="M62 30q16-4 20-24-18 2-20 24z"/>
+        <path d="M61 52q-16-4-20-24 18 2 20 24z"/><path d="M61 52q16-4 20-24-18 2-20 24z"/>
+        <path d="M60 74q-16-4-20-24 18 2 20 24z"/><path d="M60 74q16-4 20-24-18 2-20 24z"/>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-kicker reveal">
+        <span class="kicker-spidey">🕷️ Your friendly neighborhood engineer</span>
+        <span class="kicker-batman">🦇 The engineer Gotham deserves</span>
+        <span class="kicker-pro">Welcome to my portfolio</span>
+        <span class="kicker-noir">✦ Midnight professional</span>
+        <span class="kicker-cap">🛡️ I can do this all day</span>
+        <span class="kicker-vinland">🌾 I have no enemies — only solutions</span>
+        <span class="kicker-luffy">🏴‍☠️ Future king of the engineers</span>
+        <span class="kicker-naruto">🍥 Never gives up — believe it!</span>
+      </p>
+      <h1 class="hero-name reveal">Dhanush Kumar <span class="accent">S V</span></h1>
+      <h2 class="hero-role reveal"><span id="typewriter"></span><span class="caret">|</span></h2>
+      <p class="hero-summary reveal">
+        Turning complex chemical processes into optimized, efficient systems —
+        with <strong>Aspen Plus</strong>, <strong>Aspen HYSYS</strong>, <strong>MATLAB</strong> and
+        a passion for data-driven improvement.
+      </p>
+      <div class="hero-cta reveal">
+        <a href="#resume" class="btn btn-primary">📄 Download Resume</a>
+        <a href="#chatbot" class="btn btn-ghost">🤖 Ask My Assistant</a>
+      </div>
+
+      <div class="hero-stats reveal">
+        <div class="stat">
+          <span class="stat-num" data-count="3.95" data-decimals="2">0</span>
+          <span class="stat-label">M.S. GPA / 4.3</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num"><span data-count="17">0</span>%</span>
+          <span class="stat-label">Supply-chain cost cut</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num"><span data-count="300">0</span></span>
+          <span class="stat-label">mL·h⁻¹·L⁻¹ H₂ produced</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num"><span data-count="4">0</span>+</span>
+          <span class="stat-label">Industry internships</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="#about" class="scroll-hint" aria-label="Scroll down"><span></span></a>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="section" id="about">
+    <div class="container">
+      <p class="section-kicker reveal">01 · Who I am</p>
+      <h2 class="section-title reveal">About <span class="accent">Me</span></h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>
+            I'm a <strong>Process Engineer</strong> based in Taichung, Taiwan, currently pursuing my
+            M.S. in Chemical Engineering at <strong>National Chung Hsing University</strong> with a
+            GPA of 3.95/4.3. I specialize in <strong>process simulation, optimization, and
+            manufacturing improvement</strong>.
+          </p>
+          <p>
+            My work spans modeling chemical and semiconductor processes with Aspen Plus, Aspen HYSYS
+            and MATLAB, with a strong grounding in <strong>yield improvement, defect reduction, and
+            process integration</strong>. I'm dedicated to enhancing production efficiency and product
+            quality through data-driven analysis and continuous improvement.
+          </p>
+          <div class="lang-chips">
+            <span class="chip">🇬🇧 English — Fluent</span>
+            <span class="chip">🇹🇼 Chinese — Basic</span>
+            <span class="chip">🇮🇳 Tamil — Native</span>
+          </div>
+        </div>
+        <div class="about-side reveal">
+          <div class="profile-pic-container">
+            <!-- Theme profile pictures -->
+            <img src="assets/images/pro.jpg.jpg" alt="Dhanush - Light Theme" class="profile-pic pic-pro" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23eee\'/%3E%3Ctext x=\'50\' y=\'50\' font-family=\'sans-serif\' font-size=\'14\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%23999\'%3Epro.jpg%3C/text%3E%3C/svg%3E'">
+            <img src="assets/images/noir.jpg.jpg" alt="Dhanush - Dark Theme" class="profile-pic pic-noir" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23333\'/%3E%3Ctext x=\'50\' y=\'50\' font-family=\'sans-serif\' font-size=\'14\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%23777\'%3Enoir.jpg%3C/text%3E%3C/svg%3E'">
+            <img src="assets/images/spiderman.jpg.png" alt="Dhanush - Spider-Man" class="profile-pic pic-spidey" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23fbb\'/%3E%3Ctext x=\'50\' y=\'50\' font-family=\'sans-serif\' font-size=\'14\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%23a33\'%3Espidey.jpg%3C/text%3E%3C/svg%3E'">
+            <img src="assets/images/batman.jpg.png" alt="Dhanush - Batman" class="profile-pic pic-batman" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23444\'/%3E%3Ctext x=\'50\' y=\'50\' font-family=\'sans-serif\' font-size=\'14\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%23ea0\'%3Ebatman.jpg%3C/text%3E%3C/svg%3E'">
+            <img src="assets/images/cap.jpg.png" alt="Dhanush - Captain America" class="profile-pic pic-cap" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23bbf\'/%3E%3Ctext x=\'50\' y=\'50\' font-family=\'sans-serif\' font-size=\'14\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%2333a\'%3Ecap.jpg%3C/text%3E%3C/svg%3E'">
+            <img src="assets/images/vinland.jpg.png" alt="Dhanush - Vinland Saga" class="profile-pic pic-vinland" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23dfd\'/%3E%3Ctext x=\'50\' y=\'50\' font-family=\'sans-serif\' font-size=\'14\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%23474\'%3Evinland.jpg%3C/text%3E%3C/svg%3E'">
+            <img src="assets/images/luffy.jpg.jpg" alt="Dhanush - Luffy" class="profile-pic pic-luffy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23bdf\'/%3E%3Ctext x=\'50\' y=\'50\' font-family=\'sans-serif\' font-size=\'14\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%2325a\'%3Eluffy.jpg%3C/text%3E%3C/svg%3E'">
+            <img src="assets/images/naruto.jpg.png" alt="Dhanush - Naruto" class="profile-pic pic-naruto" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23fdb\'/%3E%3Ctext x=\'50\' y=\'50\' font-family=\'sans-serif\' font-size=\'14\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%23a52\'%3Enaruto.jpg%3C/text%3E%3C/svg%3E'">
+          </div>
+          <div class="edu-card">
+            <div class="edu-icon">🎓</div>
+            <h3>National Chung Hsing University</h3>
+            <p class="edu-degree">M.S. in Chemical Engineering</p>
+            <p class="edu-meta">Taichung, Taiwan · 2024 – Present</p>
+            <span class="edu-gpa">GPA 3.95 / 4.3</span>
+          </div>
+          <div class="edu-card">
+            <div class="edu-icon">🎓</div>
+            <h3>Anna University</h3>
+            <p class="edu-degree">B.Tech in Chemical Engineering</p>
+            <p class="edu-meta">Chennai, India · 2019 – 2023</p>
+            <span class="edu-gpa">GPA 7.84 / 10</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERTISE ================= -->
+  <section class="section section-alt" id="expertise">
+    <div class="container">
+      <p class="section-kicker reveal">02 · What I work with</p>
+      <h2 class="section-title reveal">Technical <span class="accent">Expertise</span></h2>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-icon">⚗️</div>
+          <h3>Process Simulation</h3>
+          <div class="tags">
+            <span>Aspen Plus</span><span>Aspen HYSYS</span><span>MATLAB</span><span>GAMS</span><span>Ansys Fluent</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">🔬</div>
+          <h3>Process Integration</h3>
+          <div class="tags">
+            <span>Electrochemical coating</span><span>Surface process modeling</span><span>Yield optimization</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">📊</div>
+          <h3>Data Analysis</h3>
+          <div class="tags">
+            <span>Python</span><span>Origin</span><span>Excel</span><span>ImageJ</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">📝</div>
+          <h3>Documentation</h3>
+          <div class="tags">
+            <span>Process flow reports</span><span>Design of experiments</span><span>Technical writing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESEARCH ================= -->
+  <section class="section" id="research">
+    <div class="container">
+      <p class="section-kicker reveal">03 · What I've built</p>
+      <h2 class="section-title reveal">Research <span class="accent">Experience</span></h2>
+      <div class="research-grid">
+        <article class="research-card reveal">
+          <div class="research-badge">💧 Water Treatment</div>
+          <h3>Hybrid VMD–MED / MSF–MED Modeling for Phosphogypsum Wastewater</h3>
+          <ul>
+            <li>Modeled hybrid VMD–MED and MSF–MED systems for phosphogypsum wastewater purification via process simulation.</li>
+            <li>Integrated a microbial electrochemical cell (MEC) for enhanced phosphorus recovery and energy-efficient treatment.</li>
+            <li>Optimized energy use to improve water recovery, phosphorus yield, and system efficiency.</li>
+          </ul>
+          <div class="tags"><span>Aspen Plus</span><span>Desalination</span><span>Energy Analysis</span><span>MEC</span></div>
+        </article>
+        <article class="research-card reveal">
+          <div class="research-badge">🥛 Supply Chain</div>
+          <h3>MILP Optimization of a Cooperative Dairy Milk Supply Chain</h3>
+          <ul>
+            <li>Formulated a GAMS-based MILP model for village–BMC–plant milk procurement under capacity, flow-balance and service constraints.</li>
+            <li>Ran sensitivity &amp; scenario analyses on BMC capacity and penalty parameters to weigh cost–service trade-offs.</li>
+            <li><strong>~17% total cost reduction</strong> and up to <strong>~30% less unserved milk</strong>; identified key capacity thresholds.</li>
+          </ul>
+          <div class="tags"><span>GAMS</span><span>MILP</span><span>Optimization</span><span>Scenario Analysis</span></div>
+        </article>
+        <article class="research-card reveal">
+          <div class="research-badge">⚡ Green Energy</div>
+          <h3>Photocatalytic Hydrogen Production</h3>
+          <ul>
+            <li>Designed &amp; built a 4 L trapezoidal photocatalytic reactor for solar-driven H₂ production from sulphuric wastewater.</li>
+            <li>Achieved <strong>~300 mL h⁻¹ L⁻¹</strong> hydrogen production with TiO₂ photocatalyst under direct sunlight.</li>
+            <li>Optimized catalyst loading and sulphide concentration for maximum yield and efficiency.</li>
+          </ul>
+          <div class="tags"><span>Green Hydrogen</span><span>TiO₂</span><span>Reactor Design</span><span>Photocatalysis</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section class="section section-alt" id="experience">
+    <div class="container">
+      <p class="section-kicker reveal">04 · Where I've worked</p>
+      <h2 class="section-title reveal">Internships &amp; <span class="accent">Experience</span></h2>
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <span class="tl-period">Sep 2025 – Dec 2025</span>
+            <h3>University Teaching Assistant</h3>
+            <p class="tl-org">National Chung Hsing University, Taiwan</p>
+            <ul>
+              <li>Guided students in Aspen Plus process simulation, troubleshooting modeling &amp; convergence issues.</li>
+              <li>Supported design and optimization of chemical processes through hands-on simulation exercises.</li>
+              <li>Taught optimization concepts in GAMS — constraints, objective functions, structured problem solving.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <span class="tl-period">Oct 2022 – Nov 2022</span>
+            <h3>Quality Assurance Trainee</h3>
+            <p class="tl-org">Steel Authority of India Limited (SAIL), Salem</p>
+            <ul>
+              <li>Analyzed hot &amp; cold rolling line production data to find factors affecting steel yield and quality.</li>
+              <li>Investigated manufacturing defects; contributed to root-cause analysis for process improvement.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <span class="tl-period">Nov 2021 – Jan 2022</span>
+            <h3>CFD Research Intern</h3>
+            <p class="tl-org">Indian Institute of Technology, Indore</p>
+            <ul>
+              <li>Performed CFD analysis for chemical processes; learned parameter optimization &amp; reporting techniques.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <span class="tl-period">Aug 2021</span>
+            <h3>Surface Coating Intern</h3>
+            <p class="tl-org">RK Metals</p>
+            <ul>
+              <li>Studied electrochemical coating &amp; metallization methods for industrial surface treatment.</li>
+              <li>Evaluated coating thickness, adhesion, and corrosion resistance.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PUBLICATIONS ================= -->
+  <section class="section" id="publications">
+    <div class="container">
+      <p class="section-kicker reveal">05 · What I've published</p>
+      <h2 class="section-title reveal">Publications &amp; <span class="accent">Conferences</span></h2>
+      <div class="pub-list">
+        <div class="pub-card reveal">
+          <div class="pub-year">2024</div>
+          <div>
+            <h3>“Location Selection and Purification Process Simulation for a Glycerol Plant”</h3>
+            <p>ICATES 2024 — International Conference</p>
+          </div>
+        </div>
+        <div class="pub-card reveal">
+          <div class="pub-year">2023</div>
+          <div>
+            <h3>“Production of Hydrogen Gas Using Photo-catalytic Method”</h3>
+            <p>ICATS 2023 — International Conference</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESUME ================= -->
+  <section class="section section-alt" id="resume">
+    <div class="container">
+      <p class="section-kicker reveal">06 · Take it with you</p>
+      <h2 class="section-title reveal">Download <span class="accent">Resume</span></h2>
+      <div class="resume-card reveal">
+        <div class="resume-info">
+          <div class="resume-icon">📄</div>
+          <div>
+            <h3>Dhanush Kumar S V — Process Engineer</h3>
+            <p>One page. Everything that matters: education, simulation expertise, research, internships &amp; publications.</p>
+            <div class="tags">
+              <span>Aspen Plus</span><span>HYSYS</span><span>MATLAB</span><span>GAMS</span><span>Python</span>
+            </div>
+          </div>
+        </div>
+        <div class="resume-actions">
+          <a class="btn btn-primary" href="assets/Dhanush_Kumar_Resume.pdf" download>⬇ Download PDF</a>
+          <a class="btn btn-ghost" href="assets/Dhanush_Kumar_Resume.docx" download>⬇ Word (.docx)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CHATBOT ================= -->
+  <section class="section" id="chatbot">
+    <div class="container">
+      <p class="section-kicker reveal">07 · Ask anything</p>
+      <h2 class="section-title reveal">Resume <span class="accent">Assistant</span></h2>
+      <p class="section-sub reveal">An interactive assistant that answers questions about my education, skills, research and experience.</p>
+
+      <div class="chat-shell reveal">
+        <div class="chat-header">
+          <div class="chat-avatar" id="chatAvatar">🤖</div>
+          <div>
+            <p class="chat-title" id="chatTitle">Dhanush's Assistant</p>
+            <p class="chat-status"><span class="status-dot"></span> Online — ask me anything</p>
+          </div>
+        </div>
+        <div class="chat-window" id="chatWindow" aria-live="polite"></div>
+        <div class="chat-suggestions" id="chatSuggestions"></div>
+        <form class="chat-input-row" id="chatForm">
+          <input type="text" id="chatInput" placeholder="e.g. What software does Dhanush use?" autocomplete="off" />
+          <button type="submit" class="btn btn-primary chat-send" aria-label="Send">➤</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= IDENTITY VAULT (hidden themes) ================= -->
+  <section class="vault-section" id="identities">
+    <div class="container">
+      <button class="vault-toggle" id="vaultToggle" aria-expanded="false" aria-controls="vault">
+        <span class="vault-mask">🎭</span> Hidden identities <span class="vault-hint">— open the vault</span>
+      </button>
+      <div class="vault" id="vault">
+        <div class="vault-grid">
+          <button class="vault-card vc-spidey" data-set-theme="spidey">
+            <span class="vc-emoji">🕷️</span><span class="vc-name">Spider-Man</span><span class="vc-desc">Red &amp; white hero energy</span>
+          </button>
+          <button class="vault-card vc-batman" data-set-theme="batman">
+            <span class="vc-emoji">🦇</span><span class="vc-name">Batman</span><span class="vc-desc">Gotham after dark</span>
+          </button>
+          <button class="vault-card vc-cap" data-set-theme="cap">
+            <span class="vc-emoji">🛡️</span><span class="vc-name">Captain America</span><span class="vc-desc">Stars &amp; stripes</span>
+          </button>
+          <button class="vault-card vc-vinland" data-set-theme="vinland">
+            <span class="vc-emoji">🌾</span><span class="vc-name">Vinland Saga</span><span class="vc-desc">Peaceful warm fields</span>
+          </button>
+          <button class="vault-card vc-luffy" data-set-theme="luffy">
+            <span class="vc-emoji">🏴‍☠️</span><span class="vc-name">Luffy</span><span class="vc-desc">Sunny seas &amp; straw hats</span>
+          </button>
+          <button class="vault-card vc-naruto" data-set-theme="naruto">
+            <span class="vc-emoji">🍥</span><span class="vc-name">Naruto</span><span class="vc-desc">Orange ninja spirit</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT / FOOTER ================= -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <h2 class="section-title reveal">Let's <span class="accent">Connect</span></h2>
+      <p class="footer-sub reveal">Open to process engineering roles, research collaboration, and interesting problems.</p>
+      <div class="contact-grid reveal">
+        <a class="contact-card" href="mailto:dhanushkumar795@gmail.com">
+          <span class="contact-icon">✉️</span>
+          <span class="contact-label">Email</span>
+          <span class="contact-value">dhanushkumar795@gmail.com</span>
+        </a>
+        <a class="contact-card" href="tel:+8860909505486">
+          <span class="contact-icon">📞</span>
+          <span class="contact-label">Phone</span>
+          <span class="contact-value">+886-0909505486</span>
+        </a>
+        <a class="contact-card" href="https://linkedin.com/in/dhanush-kumar-772274213" target="_blank" rel="noopener">
+          <span class="contact-icon">💼</span>
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">dhanush-kumar-772274213</span>
+        </a>
+        <div class="contact-card">
+          <span class="contact-icon">📍</span>
+          <span class="contact-label">Location</span>
+          <span class="contact-value">Taichung, Taiwan</span>
+        </div>
+      </div>
+      <p class="footer-note">© 2026 Dhanush Kumar S V · Built with 🧪 chemistry &amp; a little superhero energy.<br>
+      <span class="footer-secret">Psst — six identities hide in the vault just above. Or ask the assistant about <em>secrets</em> 🤫</span></p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Theme special skills -->
+  <div id="lightsOut" aria-hidden="true"></div>
+  <div id="windWash" aria-hidden="true"></div>
+  <div id="spiderverseDots" aria-hidden="true"></div>
+  <div id="genjutsu" aria-hidden="true">
+    <svg class="sharingan" viewBox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle r="96" fill="#b81424"/>
+      <circle r="96" fill="none" stroke="#20070a" stroke-width="6"/>
+      <circle r="54" fill="none" stroke="#20070a" stroke-width="4"/>
+      <circle r="24" fill="#16060a"/>
+      <g fill="#16060a">
+        <g><circle cy="-54" r="11"/><path d="M-2 -66q16 4 12 24-6-9-12-12z"/></g>
+        <g transform="rotate(120)"><circle cy="-54" r="11"/><path d="M-2 -66q16 4 12 24-6-9-12-12z"/></g>
+        <g transform="rotate(240)"><circle cy="-54" r="11"/><path d="M-2 -66q16 4 12 24-6-9-12-12z"/></g>
+      </g>
+    </svg>
+  </div>
+  <div id="kaiFlash" aria-hidden="true"></div>
+  <div id="shieldFly" aria-hidden="true">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="98" fill="#b31942"/>
+      <circle cx="100" cy="100" r="74" fill="#f5f7fa"/>
+      <circle cx="100" cy="100" r="50" fill="#b31942"/>
+      <circle cx="100" cy="100" r="28" fill="#0a3161"/>
+      <path fill="#f5f7fa" d="M100 76l7 14.9 16.4 2-12 11.3 3 16.2-14.4-7.9-14.4 7.9 3-16.2-12-11.3 16.4-2z"/>
+    </svg>
+  </div>
+  <div id="hudFrame" aria-hidden="true">
+    <span class="hud-tag">● BLUEPRINT MODE</span>
+    <div class="hud-scanline"></div>
+  </div>
+  <div id="starfield" aria-hidden="true"></div>
+  <div id="ocean" aria-hidden="true">
+    <svg class="ocean-wave ocean-w1" viewBox="0 0 2880 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill="rgba(15,122,184,.55)" d="M0 45 Q180 5 360 45 T720 45 T1080 45 T1440 45 T1800 45 T2160 45 T2520 45 T2880 45 V90 H0 Z"/>
+    </svg>
+    <svg class="ocean-wave ocean-w2" viewBox="0 0 2880 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill="rgba(40,181,164,.4)" d="M0 45 Q180 85 360 45 T720 45 T1080 45 T1440 45 T1800 45 T2160 45 T2520 45 T2880 45 V90 H0 Z"/>
+    </svg>
+    <div class="ocean-body"></div>
+  </div>
+  <button class="skill-btn" id="skillBtn" hidden></button>
+
+  <script src="js/resume-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>
