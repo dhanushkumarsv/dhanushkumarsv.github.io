@@ -1016,13 +1016,26 @@ body.genjutsu section {
   background: var(--chip-bg); border: 1px solid var(--border);
   padding: 8px 14px; border-radius: 999px; font-size: .85rem; font-weight: 600;
 }
-
+.edu-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px 24px; box-shadow: var(--shadow); position: relative;
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s;
+}
+.edu-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
+.edu-icon { font-size: 1.5rem; margin-bottom: 8px; }
+.edu-card h3 { font-size: 1.05rem; margin-bottom: 2px; }
+.edu-degree { color: var(--accent); font-weight: 600; font-size: .92rem; }
+.edu-meta { color: var(--text-muted); font-size: .84rem; margin: 4px 0 10px; }
+.edu-gpa {
+  display: inline-block; background: var(--hero-grad); color: #fff;
+  font-size: .78rem; font-weight: 700; padding: 4px 12px; border-radius: 999px;
+}
 .about-side { display: flex; flex-direction: column; gap: 18px; }
 
 /* Profile Pictures based on Theme */
 .profile-pic-container {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 4/5;
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -1049,20 +1062,7 @@ body.genjutsu section {
   display: block;
 }
 
-.edu-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 22px 24px; box-shadow: var(--shadow); position: relative;
-  transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s;
-}
-.edu-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
-.edu-icon { font-size: 1.5rem; margin-bottom: 8px; }
-.edu-card h3 { font-size: 1.05rem; margin-bottom: 2px; }
-.edu-degree { color: var(--accent); font-weight: 600; font-size: .92rem; }
-.edu-meta { color: var(--text-muted); font-size: .84rem; margin: 4px 0 10px; }
-.edu-gpa {
-  display: inline-block; background: var(--hero-grad); color: #fff;
-  font-size: .78rem; font-weight: 700; padding: 4px 12px; border-radius: 999px;
-}
+
 [data-theme="batman"] .edu-gpa { color: var(--accent-contrast); }
 
 /* --------------------------------------------------------------------------
